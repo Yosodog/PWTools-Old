@@ -1,0 +1,20 @@
+{
+  "name": "yosodog/pwtools",
+  "version": "0.1",
+  "description": "A library full of tools for Politics and War",
+  "license": "",
+  "keywords": ["politics and war"],
+  "require": {
+    "php": ">=7.0.0",
+    "guzzlehttp/guzzle": "~6.0"
+  },
+  "require-dev": {
+    "phpdocumentor/phpdocumentor": "2.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Yosodog\\PWTools\\": "src/"
+    }
+  },
+  "minimum-stability": "stable"
+}
