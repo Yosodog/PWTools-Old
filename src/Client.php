@@ -2,6 +2,8 @@
 
 namespace Yosodog\PWTools;
 
+use PHPHtmlParser\Dom;
+
 class Client
 {
     /**
@@ -148,9 +150,14 @@ class Client
      *
      * @param string $url
      * @param array $postData
+     * @param bool $needsToBeLoggedIn
+     * @throws \Exception
      */
-    protected function sendPOST(string $url, array $postData)
+    public function sendPOST(string $url, array $postData, bool $needsToBeLoggedIn = false)
     {
+        if ($needsToBeLoggedIn && ! $this->loggedIn)
+            throw new \Exception("You need to be logged in to send this POST request");
+
         // Setup POST
         $post = [
             "form_params" => $postData
@@ -159,8 +166,42 @@ class Client
         $this->client->request("POST", $url, $post);
     }
 
-    protected function sendGET(string $url)
+    /**
+     * Sends a GET request and returns the HTML
+     *
+     * @param string $url
+     * @param array $params
+     * @param bool $needsToBeLoggedIn
+     * @return string
+     * @throws \Exception
+     */
+    public function sendGET(string $url, array $params = [], bool $needsToBeLoggedIn = false) : string
     {
-        // TODO
+        if ($needsToBeLoggedIn && ! $this->loggedIn)
+            throw new \Exception("You need to be logged in to send this GET request");
+
+        return $this->client->get($url, [
+            "query" => $params
+        ])->getBody();
+    }
+
+    /**
+     * Gets the CSRF token in PW for certain POST requests
+     *
+     * @param int $allianceID This should be whatever alliance ID the currently logged in user is
+     * @return string
+     */
+    public function getToken(int $allianceID) : string
+    {
+        // Get the HTML of the bank page
+        $html = $this->sendGET("https://politicsandwar.com/alliance/id={$allianceID}&display=bank", [], true); // It is sometimes faster to get the token from a city page, so maybe do that in the future
+
+        $dom = new Dom();
+        $dom->load($html);
+
+        // Get the token from the input name
+        $token = $dom->find("input[name=token]");
+
+        return $token->value;
     }
 }
