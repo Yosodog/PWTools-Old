@@ -205,4 +205,27 @@ class Client
 
         return $token->value;
     }
+
+    /**
+     * Sends a message to someone
+     *
+     * @param string $recipient
+     * @param string $subject
+     * @param string $message
+     * @throws \Exception
+     */
+    public function sendMessage(string $recipient, string $subject, string $message)
+    {
+        if (! $this->loggedIn)
+            throw new \Exception("You must be logged in to send a message. Run login() first.");
+
+        $this->sendPOST("https://politicsandwar.com/inbox/message/", [
+            "newconversation" => "true", // Has to be a string
+            "receiver" => $recipient,
+            "carboncopy" => "",
+            "subject" => $subject,
+            "body" => $message,
+            "sndmsg" => "Send Message",
+        ], true);
+    }
 }
