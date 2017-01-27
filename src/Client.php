@@ -151,6 +151,7 @@ class Client
      * @param string $url
      * @param array $postData
      * @param bool $needsToBeLoggedIn
+     * @return \Psr\Http\Message\StreamInterface
      * @throws \Exception
      */
     public function sendPOST(string $url, array $postData, bool $needsToBeLoggedIn = false)
@@ -163,7 +164,7 @@ class Client
             "form_params" => $postData
         ];
 
-        $this->client->request("POST", $url, $post);
+        return $this->client->request("POST", $url, $post)->getBody();
     }
 
     /**

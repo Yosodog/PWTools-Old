@@ -2,6 +2,9 @@
 
 namespace Yosodog\PWTools;
 
+use PHPHtmlParser\Dom;
+use Psr\Http\Message\StreamInterface;
+
 class Bank
 {
     /**
@@ -170,6 +173,67 @@ class Bank
         if (empty($this->postData))
             throw new \Exception("Post data empty. Run setupPOST() first");
 
-        $x = $this->client->sendPOST("https://politicsandwar.com/alliance/id=877&display=bank",$this->postData, true);
+        $x = $this->client->sendPOST("https://politicsandwar.com/alliance/id={$this->aID}&display=bank",$this->postData, true);
     }
+
+    // TODO finish the tax records stuff. I should've made another branch for this but lol
+
+    /**
+     * Get tax records for an alliance. Returns an array of all the records
+     *
+     * @param int $numRecords How many records should we return
+     * @return array
+     */
+    /*public function getTaxRecords(int $numRecords) : array
+    {
+        $taxes = []; // Setup array that we'll return
+
+        $html = $this->getTaxHTML($numRecords);
+
+        $dom = new Dom();
+        $dom->load($html);
+
+        $maxRow = $numRecords + 2; // So we know how many rows to go up to in the taxes, add two
+
+        for ($row = 2; $row < $maxRow; $row++)
+        {
+            // Setup/reset this array
+            $record = [
+                "timestamp" => "",
+                "nID" => 0,
+                "money" => 0,
+                "food" => 0,
+                "coal" => 0,
+                "oil" => 0,
+                "uranium" => 0,
+                "iron" => 0,
+                "bauxite" => 0,
+                "gasoline" => 0,
+                "munitions" => 0,
+                "steel" => 0,
+                "aluminum" => 0,
+            ];
+
+            // Get the timestamp and nation ID
+            $record["timestamp"] = $html->find(".nationtable table tr:nth-child($row) td:nth-child(2)")->text;
+
+            array_push($taxes, $record);
+        }
+
+        return $taxes;
+    }*/
+
+    /**
+     * Get the HTML for taxes
+     *
+     * @param int $numRecords
+     */
+    /*protected function getTaxHTML(int $numRecords)
+    {
+        return $this->client->sendPOST("https://politicsandwar.com/alliance/id={$this->aID}&display=bank", [
+            "maximum" => $numRecords,
+            "minimum" => 0,
+            "search" => "Go"
+        ]);
+    }*/
 }
