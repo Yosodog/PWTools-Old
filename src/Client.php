@@ -44,7 +44,7 @@ class Client
     public function __construct(string $email = null, string $password = null)
     {
         $this->client = new \GuzzleHttp\Client([
-            "verify" => false,
+            "verify"  => false,
             "cookies" => true
         ]);
 
@@ -113,20 +113,17 @@ class Client
         if ($this->loggedIn)
             return;
 
-        if ($rememberMe)
-        {
+        if ($rememberMe) {
             $postData = [
-                "email" => $this->email,
-                "password" => $this->password,
+                "email"      => $this->email,
+                "password"   => $this->password,
                 "rememberme" => 1,
-                "loginform" => "Login"
+                "loginform"  => "Login"
             ];
-        }
-        else
-        {
+        } else {
             $postData = [
-                "email" => $this->email,
-                "password" => $this->password,
+                "email"     => $this->email,
+                "password"  => $this->password,
                 "loginform" => "Login"
             ];
         }
@@ -156,7 +153,7 @@ class Client
      */
     public function sendPOST(string $url, array $postData, bool $needsToBeLoggedIn = false)
     {
-        if ($needsToBeLoggedIn && ! $this->loggedIn)
+        if ($needsToBeLoggedIn && !$this->loggedIn)
             throw new \Exception("You need to be logged in to send this POST request");
 
         // Setup POST
@@ -178,7 +175,7 @@ class Client
      */
     public function sendGET(string $url, array $params = [], bool $needsToBeLoggedIn = false) : string
     {
-        if ($needsToBeLoggedIn && ! $this->loggedIn)
+        if ($needsToBeLoggedIn && !$this->loggedIn)
             throw new \Exception("You need to be logged in to send this GET request");
 
         return $this->client->get($url, [
@@ -216,16 +213,105 @@ class Client
      */
     public function sendMessage(string $recipient, string $subject, string $message)
     {
-        if (! $this->loggedIn)
+        if (!$this->loggedIn)
             throw new \Exception("You must be logged in to send a message. Run login() first.");
 
         $this->sendPOST("https://politicsandwar.com/inbox/message/", [
             "newconversation" => "true", // Has to be a string
-            "receiver" => $recipient,
-            "carboncopy" => "",
-            "subject" => $subject,
-            "body" => $message,
-            "sndmsg" => "Send Message",
+            "receiver"        => $recipient,
+            "carboncopy"      => "",
+            "subject"         => $subject,
+            "body"            => $message,
+            "sndmsg"          => "Send Message",
+        ], true);
+    }
+
+    /**
+     * Sets someone as a member in an alliance
+     *
+     * @param string $leader
+     * @param int $allianceID
+     */
+    public function acceptMember(string $leader, int $allianceID)
+    {
+        $this->changeMemberLevel($leader, 2, $allianceID);
+    }
+
+    /**
+     * Removes a member from an alliance
+     *
+     * @param string $leader
+     * @param int $allianceID
+     */
+    public function removeMember(string $leader, int $allianceID)
+    {
+        $this->changeMemberLevel($leader, 0, $allianceID);
+    }
+
+    /**
+     * Sets a member as an applicant
+     *
+     * @param string $leader
+     * @param int $allianceID
+     */
+    public function setMemberAsApplicant(string $leader, int $allianceID)
+    {
+        $this->changeMemberLevel($leader, 1, $allianceID);
+    }
+
+    /**
+     * Sets a member as an officer
+     *
+     * @param string $leader
+     * @param int $allianceID
+     */
+    public function setMemberAsOfficer(string $leader, int $allianceID)
+    {
+        $this->changeMemberLevel($leader, 3, $allianceID);
+    }
+
+    /**
+     * Sets a member as the heir
+     *
+     * @param string $leader
+     * @param int $allianceID
+     */
+    public function setMemberAsHeir(string $leader, int $allianceID)
+    {
+        $this->changeMemberLevel($leader, 4, $allianceID);
+    }
+
+    /**
+     * Sets a member as the leader
+     *
+     * @param string $leader
+     * @param int $allianceID
+     */
+    public function sentMemberAsLeader(string $leader, int $allianceID)
+    {
+        $this->changeMemberLevel($leader, 5, $allianceID);
+    }
+
+    /**
+     * Change a member's level in-game.
+     *
+     * 0 = Remove
+     * 1 = Applicant
+     * 2 = Member
+     * 3 = Officer
+     * 4 = Heir
+     * 5 = Leader
+     *
+     * @param string $leader
+     * @param int $level
+     * @param int $allianceID
+     */
+    protected function changeMemberLevel(string $leader, int $level, int $allianceID)
+    {
+        $this->sendPOST("https://politicsandwar.com/alliance/id={$allianceID}", [
+            "nationperm" => $leader,
+            "level" => $level,
+            "permsubmit" => "Go",
         ], true);
     }
 }
