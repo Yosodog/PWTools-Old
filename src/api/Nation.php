@@ -679,7 +679,7 @@ class Nation
     }
 
     /**
-     * Buy or sell ships. Enter negative number to sell aircraft.
+     * Buy or sell ships. Enter negative number to sell ships.
      *
      * @param int $amount
      * @param Client $client
@@ -696,6 +696,28 @@ class Nation
         $this->client->sendPOST("https://politicsandwar.com/nation/military/navy/", [
             "ships" => $amount,
             "buyships" => "Go",
+            "token" => $token,
+        ]);
+    }
+
+    /**
+     * Buy/sell spies. Enter negative number to sell spies.
+     *
+     * @param int $amount
+     * @param Client $client
+     * @throws \Exception
+     */
+    public function buySpies(int $amount, Client $client)
+    {
+        if (! $client->isLoggedIn())
+            throw new \Exception('You must be logged in to do this action');
+        $this->client = $client;
+
+        $token = $this->getToken();
+
+        $this->client->sendPOST("https://politicsandwar.com/nation/military/spies/", [
+            "ships" => $amount, // Yes, this param is named ships
+            "buyships" => "Go", // Again, yes, this is ships
             "token" => $token,
         ]);
     }
