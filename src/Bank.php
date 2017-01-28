@@ -3,12 +3,11 @@
 namespace Yosodog\PWTools;
 
 use PHPHtmlParser\Dom;
-use Psr\Http\Message\StreamInterface;
 
 class Bank
 {
     /**
-     * @var int $money
+     * @var int
      * @var int $food
      * @var int $coal
      * @var int $oil
@@ -48,17 +47,17 @@ class Bank
      *
      * @var string
      */
-    public $type = "Nation";
+    public $type = 'Nation';
 
     /**
      * The note added alongside the bank request.
      *
      * @var string
      */
-    public $note = "";
+    public $note = '';
 
     /**
-     * Store the CSRF token for the request
+     * Store the CSRF token for the request.
      *
      * @var string
      */
@@ -108,7 +107,6 @@ class Bank
         // Check to see if the recipient is filled out
         if (empty($this->recipient))
             throw new \Exception("Couldn't send -> Recipient empty");
-
         $this->getToken();
         $this->setupPost();
 
@@ -138,26 +136,25 @@ class Bank
     {
         // Check if the token is setup
         if (empty($this->token))
-            throw new \Exception("Token not set. Run getToken() first");
-
+            throw new \Exception('Token not set. Run getToken() first');
         $this->postData = [
-            "withmoney" => $this->money,
-            "withfood" => $this->food,
-            "withcoal" => $this->coal,
-            "withoil" => $this->oil,
-            "withuranium" => $this->uranium,
-            "withlead" => $this->lead,
-            "withiron" => $this->iron,
-            "withbauxite" => $this->bauxite,
-            "withgasoline" => $this->gasoline,
-            "withmunitions" => $this->munitions,
-            "withsteel" => $this->steel,
-            "withaluminum" => $this->aluminum,
-            "withtype" => $this->type,
-            "withrecipient" => $this->recipient,
-            "withnote" => $this->note,
-            "withsubmit" => "Withdraw",
-            "token" => $this->token,
+            'withmoney' => $this->money,
+            'withfood' => $this->food,
+            'withcoal' => $this->coal,
+            'withoil' => $this->oil,
+            'withuranium' => $this->uranium,
+            'withlead' => $this->lead,
+            'withiron' => $this->iron,
+            'withbauxite' => $this->bauxite,
+            'withgasoline' => $this->gasoline,
+            'withmunitions' => $this->munitions,
+            'withsteel' => $this->steel,
+            'withaluminum' => $this->aluminum,
+            'withtype' => $this->type,
+            'withrecipient' => $this->recipient,
+            'withnote' => $this->note,
+            'withsubmit' => 'Withdraw',
+            'token' => $this->token,
         ];
 
     }
@@ -171,14 +168,13 @@ class Bank
     {
         // Check if the postData is empty
         if (empty($this->postData))
-            throw new \Exception("Post data empty. Run setupPOST() first");
-
-        $x = $this->client->sendPOST("https://politicsandwar.com/alliance/id={$this->aID}&display=bank",$this->postData, true);
+            throw new \Exception('Post data empty. Run setupPOST() first');
+        $x = $this->client->sendPOST("https://politicsandwar.com/alliance/id={$this->aID}&display=bank", $this->postData, true);
     }
 
     // TODO finish the tax records stuff. I should've made another branch for this but lol
 
-    /**
+    /*
      * Get tax records for an alliance. Returns an array of all the records
      *
      * @param int $numRecords How many records should we return
@@ -223,7 +219,7 @@ class Bank
         return $taxes;
     }*/
 
-    /**
+    /*
      * Get the HTML for taxes
      *
      * @param int $numRecords

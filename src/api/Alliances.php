@@ -2,7 +2,6 @@
 
 namespace Yosodog\PWTools\API;
 
-
 use Yosodog\PWTools\Client;
 
 class Alliances
@@ -14,7 +13,7 @@ class Alliances
      */
     public $json;
     /**
-     * Holds all of the alliance IDs in the game
+     * Holds all of the alliance IDs in the game.
      *
      * Call getAllianceIDs() to fill this
      *
@@ -22,7 +21,7 @@ class Alliances
      */
     public $aIDs = [];
     /**
-     * Holds the client which we'll do stuff with
+     * Holds the client which we'll do stuff with.
      *
      * @var Client
      */
@@ -42,11 +41,11 @@ class Alliances
      */
     protected function callAPI()
     {
-        $this->json = \json_decode($this->client->getPage("https://politicsandwar.com/api/alliances/"));
+        $this->json = \json_decode($this->client->getPage('https://politicsandwar.com/api/alliances/'));
     }
 
     /**
-     * Gets all of the alliance IDs and stores them in $this->aIDs
+     * Gets all of the alliance IDs and stores them in $this->aIDs.
      */
     public function getAllianceIDs()
     {

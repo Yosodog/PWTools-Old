@@ -7,7 +7,7 @@ use Yosodog\PWTools\Client;
 class Wars
 {
     /**
-     * Holds the JSON returned from the API
+     * Holds the JSON returned from the API.
      *
      * @var \stdClass
      */
@@ -29,12 +29,12 @@ class Wars
 
     public function getAllianceDefensiveWars(string $allianceName) : array
     {
-        return $this->getAllianceWars($allianceName, "defensive");
+        return $this->getAllianceWars($allianceName, 'defensive');
     }
 
     public function getAllianceOffensiveWars(string $allianceName) : array
     {
-        return $this->getAllianceWars($allianceName, "offensive");
+        return $this->getAllianceWars($allianceName, 'offensive');
     }
 
     protected function getAllianceWars(string $allianceName, string $type) : array
@@ -42,10 +42,10 @@ class Wars
         $wars = [];
 
         // So we can make this dynamic, check if we're looking for offensive or defensive wars
-        if ($type == "offensive")
-            $var = "attackingAA";
-        else if ($type == "defensive")
-            $var = "defenderAA";
+        if ($type == 'offensive')
+            $var = 'attackingAA';
+        elseif ($type == 'defensive')
+            $var = 'defenderAA';
 
         foreach ($this->json->wars as $war)
         {
@@ -82,11 +82,11 @@ class Wars
     {
         switch ($type)
         {
-            case "offensive":
-                $var = "attackingAA";
+            case 'offensive':
+                $var = 'attackingAA';
                 break;
-            case "defensive":
-                $var = "defendingAA";
+            case 'defensive':
+                $var = 'defendingAA';
                 break;
             default:
                 throw new \Exception('$type must be either offensive or defensive');
