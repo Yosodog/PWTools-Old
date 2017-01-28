@@ -54,7 +54,7 @@ class Client
     }
 
     /**
-     * Grabs a page and returns the HTML.
+     * Grabs a page and returns the HTML. This is different than sendGET() which allows parameters
      *
      * @param string $url
      * @return string
@@ -309,5 +309,15 @@ class Client
             'level' => $level,
             'permsubmit' => 'Go',
         ], true);
+    }
+
+    /**
+     * Method for scripts outside this scope to check if logged in
+     *
+     * @return bool
+     */
+    public function isLoggedIn() : bool
+    {
+        return $this->loggedIn;
     }
 }
