@@ -633,4 +633,26 @@ class Nation
             "token" => $token,
         ]);
     }
+
+    /**
+     * Buy or sell tanks. Enter negative number to sell tanks
+     *
+     * @param int $amount
+     * @param Client $client
+     * @throws \Exception
+     */
+    public function buyTanks(int $amount, Client $client)
+    {
+        if (! $client->isLoggedIn())
+            throw new \Exception('You must be logged in to do this action');
+        $this->client = $client;
+
+        $token = $this->getToken();
+
+        $this->client->sendPOST("https://politicsandwar.com/nation/military/tanks/", [
+            "tanks" => $amount,
+            "buytanks" => "Go",
+            "token" => $token,
+        ]);
+    }
 }
