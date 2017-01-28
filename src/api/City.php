@@ -519,7 +519,7 @@ class City
     }
 
     /**
-     * Rename the city
+     * Rename the city.
      *
      * @param string $name
      * @param Client $client
