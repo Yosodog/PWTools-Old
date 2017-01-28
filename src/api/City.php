@@ -519,7 +519,7 @@ class City
     }
 
     /**
-     * Rename the city
+     * Rename the city.
      *
      * @param string $name
      * @param Client $client
@@ -566,7 +566,7 @@ class City
     }
 
     /**
-     * Buy land and infra
+     * Buy land and infra.
      *
      * @param float $infra
      * @param float $land
@@ -582,10 +582,10 @@ class City
         $token = $this->getToken();
 
         $this->client->sendPOST("https://politicsandwar.com/city/id={$this->cID}", [
-            "infra" => $infra,
-            "land" => $land,
-            "submitcityform" => "Go",
-            "token" => $token,
+            'infra' => $infra,
+            'land' => $land,
+            'submitcityform' => 'Go',
+            'token' => $token,
         ], true);
     }
 }
