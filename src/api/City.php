@@ -446,7 +446,7 @@ class City
     }
 
     /**
-     * The method that actually buys or sells an improvement
+     * The method that actually buys or sells an improvement.
      *
      * @param string $name
      * @param string $sellOrBuy
@@ -454,36 +454,34 @@ class City
      */
     protected function modifyImprovement(string $name, string $sellOrBuy)
     {
-        if (!$this->client->isLoggedIn())
+        if (! $this->client->isLoggedIn())
             throw new \Exception('You must be logged in to do this action');
-
         $token = $this->getToken();
 
-        $param = $sellOrBuy.$name; // Concat the improvement name with the sell/buy
+        $param = $sellOrBuy . $name; // Concat the improvement name with the sell/buy
 
         $this->client->sendPOST("https://politicsandwar.com/city/id={$this->cID}", [
-            $param => $sellOrBuy === "buy" ? "+" : "-",
-            "token" => $token,
+            $param => $sellOrBuy === 'buy' ? '+' : '-',
+            'token' => $token,
         ]);
     }
 
     /**
-     * Gets a CSRF token from the city page
+     * Gets a CSRF token from the city page.
      *
      * @return string
      * @throws \Exception
      */
     protected function getToken() : string
     {
-        if (!$this->client->isLoggedIn())
+        if (! $this->client->isLoggedIn())
             throw new \Exception('You must be logged in to do this action');
-
         $html = $this->client->getPage("https://politicsandwar.com/city/id={$this->cID}");
 
         $dom = new Dom();
         $dom->load($html);
 
-        $token = $dom->find("input[name=token]");
+        $token = $dom->find('input[name=token]');
 
         return $token->value;
     }

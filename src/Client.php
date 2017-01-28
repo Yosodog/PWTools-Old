@@ -54,7 +54,7 @@ class Client
     }
 
     /**
-     * Grabs a page and returns the HTML. This is different than sendGET() which allows parameters
+     * Grabs a page and returns the HTML. This is different than sendGET() which allows parameters.
      *
      * @param string $url
      * @return string
@@ -312,7 +312,7 @@ class Client
     }
 
     /**
-     * Method for scripts outside this scope to check if logged in
+     * Method for scripts outside this scope to check if logged in.
      *
      * @return bool
      */
