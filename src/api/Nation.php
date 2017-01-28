@@ -677,4 +677,26 @@ class Nation
             "token" => $token,
         ]);
     }
+
+    /**
+     * Buy or sell ships. Enter negative number to sell aircraft.
+     *
+     * @param int $amount
+     * @param Client $client
+     * @throws \Exception
+     */
+    public function buyShips(int $amount, Client $client)
+    {
+        if (! $client->isLoggedIn())
+            throw new \Exception('You must be logged in to do this action');
+        $this->client = $client;
+
+        $token = $this->getToken();
+
+        $this->client->sendPOST("https://politicsandwar.com/nation/military/navy/", [
+            "ships" => $amount,
+            "buyships" => "Go",
+            "token" => $token,
+        ]);
+    }
 }
