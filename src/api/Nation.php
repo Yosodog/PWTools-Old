@@ -2,6 +2,7 @@
 
 namespace Yosodog\PWTools\API;
 
+use PHPHtmlParser\Dom;
 use Yosodog\PWTools\Client;
 
 class Nation
@@ -486,6 +487,13 @@ class Nation
     public $cenCivEng;
 
     /**
+     * Hold the client for some methods
+     *
+     * @var Client
+     */
+    public $client;
+
+    /**
      * Nation constructor.
      *
      * @param int $nationID
@@ -588,5 +596,41 @@ class Nation
     public function isMember() : bool
     {
         return $this->alliancePosition > 1;
+    }
+
+    public function getToken() : string
+    {
+        if (! $this->client->isLoggedIn())
+            throw new \Exception('You must be logged in to do this action');
+        $html = $this->client->getPage("https://politicsandwar.com/nation/military/soldiers/");
+
+        $dom = new Dom();
+        $dom->load($html);
+
+        $token = $dom->find('input[name=token]');
+
+        return $token->value;
+    }
+
+    /**
+     * Buy/sell soldiers. Enter negative number to sell soldiers
+     *
+     * @param int $amount
+     * @param Client $client
+     * @throws \Exception
+     */
+    public function buySoldiers(int $amount, Client $client)
+    {
+        if (! $client->isLoggedIn())
+            throw new \Exception('You must be logged in to do this action');
+        $this->client = $client;
+
+        $token = $this->getToken();
+
+        $this->client->sendPOST("https://politicsandwar.com/nation/military/soldiers/", [
+            "soldiers" => $amount,
+            "buysoldiers" => "Go",
+            "token" => $token,
+        ]);
     }
 }
