@@ -487,4 +487,37 @@ class City
 
         return $token->value;
     }
+
+    /**
+     * Use the in-game method to export to a JSON string
+     *
+     * @return string
+     */
+    public function export() : string
+    {
+        return $this->client->getPage("https://politicsandwar.com/city/improvements/export/id={$this->cID}");
+    }
+
+    /**
+     * Import a city using the in-game import function
+     *
+     * The $json string needs to be in valid JSON format in order for the game to accept it.
+     * I don't do any verification on the string at this time.
+     *
+     * @param string $json
+     * @param Client $client
+     * @throws \Exception
+     */
+    public function import(string $json, Client $client)
+    {
+        if (!$client->isLoggedIn())
+            throw new \Exception("You must be logged in to do this action");
+
+        $this->client = $client;
+
+        $this->client->sendPOST("https://politicsandwar.com/city/improvements/import/id={$this->cID}", [
+            "imp_import" => $json,
+            "imp_import_execute" => "Execute Operation",
+        ], true);
+    }
 }
