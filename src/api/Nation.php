@@ -721,4 +721,26 @@ class Nation
             "token" => $token,
         ]);
     }
+
+    /**
+     * Buy/sell missiles. Enter negative number to sell missiles.
+     *
+     * @param int $amount
+     * @param Client $client
+     * @throws \Exception
+     */
+    public function buyMissiles(int $amount, Client $client)
+    {
+        if (! $client->isLoggedIn())
+            throw new \Exception('You must be logged in to do this action');
+        $this->client = $client;
+
+        $token = $this->getToken();
+
+        $this->client->sendPOST("https://politicsandwar.com/nation/military/missiles/", [
+            "ships" => $amount, // Yes, this param is named ships
+            "buyships" => "Go", // Again, yes, this is ships
+            "token" => $token,
+        ]);
+    }
 }
