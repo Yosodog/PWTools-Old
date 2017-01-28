@@ -487,7 +487,7 @@ class Nation
     public $cenCivEng;
 
     /**
-     * Hold the client for some methods
+     * Hold the client for some methods.
      *
      * @var Client
      */
@@ -602,7 +602,7 @@ class Nation
     {
         if (! $this->client->isLoggedIn())
             throw new \Exception('You must be logged in to do this action');
-        $html = $this->client->getPage("https://politicsandwar.com/nation/military/soldiers/");
+        $html = $this->client->getPage('https://politicsandwar.com/nation/military/soldiers/');
 
         $dom = new Dom();
         $dom->load($html);
@@ -613,7 +613,7 @@ class Nation
     }
 
     /**
-     * Buy/sell soldiers. Enter negative number to sell soldiers
+     * Buy/sell soldiers. Enter negative number to sell soldiers.
      *
      * @param int $amount
      * @param Client $client
@@ -627,15 +627,15 @@ class Nation
 
         $token = $this->getToken();
 
-        $this->client->sendPOST("https://politicsandwar.com/nation/military/soldiers/", [
-            "soldiers" => $amount,
-            "buysoldiers" => "Go",
-            "token" => $token,
+        $this->client->sendPOST('https://politicsandwar.com/nation/military/soldiers/', [
+            'soldiers' => $amount,
+            'buysoldiers' => 'Go',
+            'token' => $token,
         ]);
     }
 
     /**
-     * Buy or sell tanks. Enter negative number to sell tanks
+     * Buy or sell tanks. Enter negative number to sell tanks.
      *
      * @param int $amount
      * @param Client $client
@@ -649,10 +649,10 @@ class Nation
 
         $token = $this->getToken();
 
-        $this->client->sendPOST("https://politicsandwar.com/nation/military/tanks/", [
-            "tanks" => $amount,
-            "buytanks" => "Go",
-            "token" => $token,
+        $this->client->sendPOST('https://politicsandwar.com/nation/military/tanks/', [
+            'tanks' => $amount,
+            'buytanks' => 'Go',
+            'token' => $token,
         ]);
     }
 
@@ -671,10 +671,10 @@ class Nation
 
         $token = $this->getToken();
 
-        $this->client->sendPOST("https://politicsandwar.com/nation/military/aircraft/", [
-            "aircraft" => $amount,
-            "buyaircraft" => "Go",
-            "token" => $token,
+        $this->client->sendPOST('https://politicsandwar.com/nation/military/aircraft/', [
+            'aircraft' => $amount,
+            'buyaircraft' => 'Go',
+            'token' => $token,
         ]);
     }
 
@@ -693,10 +693,10 @@ class Nation
 
         $token = $this->getToken();
 
-        $this->client->sendPOST("https://politicsandwar.com/nation/military/navy/", [
-            "ships" => $amount,
-            "buyships" => "Go",
-            "token" => $token,
+        $this->client->sendPOST('https://politicsandwar.com/nation/military/navy/', [
+            'ships' => $amount,
+            'buyships' => 'Go',
+            'token' => $token,
         ]);
     }
 
@@ -715,10 +715,10 @@ class Nation
 
         $token = $this->getToken();
 
-        $this->client->sendPOST("https://politicsandwar.com/nation/military/spies/", [
-            "ships" => $amount, // Yes, this param is named ships
-            "buyships" => "Go", // Again, yes, this is ships
-            "token" => $token,
+        $this->client->sendPOST('https://politicsandwar.com/nation/military/spies/', [
+            'ships' => $amount, // Yes, this param is named ships
+            'buyships' => 'Go', // Again, yes, this is ships
+            'token' => $token,
         ]);
     }
 
@@ -737,10 +737,10 @@ class Nation
 
         $token = $this->getToken();
 
-        $this->client->sendPOST("https://politicsandwar.com/nation/military/missiles/", [
-            "ships" => $amount, // Yes, this param is named ships
-            "buyships" => "Go", // Again, yes, this is ships
-            "token" => $token,
+        $this->client->sendPOST('https://politicsandwar.com/nation/military/missiles/', [
+            'ships' => $amount, // Yes, this param is named ships
+            'buyships' => 'Go', // Again, yes, this is ships
+            'token' => $token,
         ]);
     }
 
@@ -759,10 +759,10 @@ class Nation
 
         $token = $this->getToken();
 
-        $this->client->sendPOST("https://politicsandwar.com/nation/military/nukes/", [
-            "ships" => $amount, // Yes, this param is named ships
-            "buyships" => "Go", // Again, yes, this is ships
-            "token" => $token,
+        $this->client->sendPOST('https://politicsandwar.com/nation/military/nukes/', [
+            'ships' => $amount, // Yes, this param is named ships
+            'buyships' => 'Go', // Again, yes, this is ships
+            'token' => $token,
         ]);
     }
 }
