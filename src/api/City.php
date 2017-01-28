@@ -542,4 +542,50 @@ class City
         // Update this class with the new city name
         $this->name = $name;
     }
+
+    /**
+     * To just buy infra. It calls the same method but looks cleaner.
+     *
+     * @param float $infra
+     * @param Client $client
+     */
+    public function buyInfra(float $infra, Client $client)
+    {
+        $this->buyInfraAndLand($infra, 0, $client);
+    }
+
+    /**
+     * To just buy land. It calls the same method but looks cleaner.
+     *
+     * @param float $land
+     * @param Client $client
+     */
+    public function buyLand(float $land, Client $client)
+    {
+        $this->buyInfraAndLand(0, $land, $client);
+    }
+
+    /**
+     * Buy land and infra
+     *
+     * @param float $infra
+     * @param float $land
+     * @param Client $client
+     * @throws \Exception
+     */
+    public function buyInfraAndLand(float $infra, float $land, Client $client)
+    {
+        if (! $client->isLoggedIn())
+            throw new \Exception('You must be logged in to do this action');
+        $this->client = $client;
+
+        $token = $this->getToken();
+
+        $this->client->sendPOST("https://politicsandwar.com/city/id={$this->cID}", [
+            "infra" => $infra,
+            "land" => $land,
+            "submitcityform" => "Go",
+            "token" => $token,
+        ], true);
+    }
 }
