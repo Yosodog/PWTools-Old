@@ -517,4 +517,29 @@ class City
             'imp_import_execute' => 'Execute Operation',
         ], true);
     }
+
+    /**
+     * Rename the city
+     *
+     * @param string $name
+     * @param Client $client
+     * @throws \Exception
+     */
+    public function rename(string $name, Client $client)
+    {
+        if (! $client->isLoggedIn())
+            throw new \Exception('You must be logged in to do this action');
+        $this->client = $client;
+
+        $token = $this->getToken();
+
+        $this->client->sendPOST("https://politicsandwar.com/city/id={$this->cID}", [
+            'newcityname' => $name,
+            'token' => $token,
+            'rename' => 'Rename',
+        ]);
+
+        // Update this class with the new city name
+        $this->name = $name;
+    }
 }
