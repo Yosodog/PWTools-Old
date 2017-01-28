@@ -487,7 +487,7 @@ class Nation
     public $cenCivEng;
 
     /**
-     * Hold the client for some methods
+     * Hold the client for some methods.
      *
      * @var Client
      */
@@ -602,7 +602,7 @@ class Nation
     {
         if (! $this->client->isLoggedIn())
             throw new \Exception('You must be logged in to do this action');
-        $html = $this->client->getPage("https://politicsandwar.com/nation/military/soldiers/");
+        $html = $this->client->getPage('https://politicsandwar.com/nation/military/soldiers/');
 
         $dom = new Dom();
         $dom->load($html);
@@ -613,7 +613,7 @@ class Nation
     }
 
     /**
-     * Buy/sell soldiers. Enter negative number to sell soldiers
+     * Buy/sell soldiers. Enter negative number to sell soldiers.
      *
      * @param int $amount
      * @param Client $client
@@ -627,10 +627,10 @@ class Nation
 
         $token = $this->getToken();
 
-        $this->client->sendPOST("https://politicsandwar.com/nation/military/soldiers/", [
-            "soldiers" => $amount,
-            "buysoldiers" => "Go",
-            "token" => $token,
+        $this->client->sendPOST('https://politicsandwar.com/nation/military/soldiers/', [
+            'soldiers' => $amount,
+            'buysoldiers' => 'Go',
+            'token' => $token,
         ]);
     }
 }
