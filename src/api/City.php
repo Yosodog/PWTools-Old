@@ -2,7 +2,6 @@
 
 namespace Yosodog\PWTools\API;
 
-
 use Yosodog\PWTools\Client;
 
 class City
@@ -263,21 +262,21 @@ class City
     public $drydocks;
 
     /**
-     * Holds the Client that we use to grab stuff
+     * Holds the Client that we use to grab stuff.
      *
      * @var Client
      */
     protected $client;
 
     /**
-     * How many improvements this city uses
+     * How many improvements this city uses.
      *
      * @var int
      */
     protected $numImprovements;
 
     /**
-     * How many improvement slots this city has
+     * How many improvement slots this city has.
      *
      * @var int
      */
@@ -290,7 +289,6 @@ class City
 
         if (isset($json->error))
             throw new \Exception($json->error);
-
         $this->cID = intval($json->cityid);
         $this->url = $json->url;
         $this->nID = intval($json->nationid);
@@ -300,7 +298,7 @@ class City
         $this->continent = $json->continent;
         $this->founded = $json->founded;
         $this->age = $json->age;
-        $this->powered = $json->powered == "Yes" ? true : false;
+        $this->powered = $json->powered == 'Yes' ? true : false;
         $this->infra = floatval($json->infrastructure);
         $this->land = floatval($json->land);
         $this->population = $json->population;
@@ -346,7 +344,7 @@ class City
     }
 
     /**
-     * Gets the number of improvements in the city
+     * Gets the number of improvements in the city.
      *
      * If it isn't already set, it will calculate it and set it
      *
@@ -354,14 +352,14 @@ class City
      */
     public function getNumImprovements() : int
     {
-        if (!isset($this->numImprovements))
+        if (! isset($this->numImprovements))
             $this->setNumImprovements();
 
         return $this->numImprovements;
     }
 
     /**
-     * Counts how many improvement slots the city uses
+     * Counts how many improvement slots the city uses.
      *
      * Returns an int and also stores the value as numImprovements
      */
@@ -400,7 +398,7 @@ class City
     }
 
     /**
-     * Calculate and set the total improvement slots in the city
+     * Calculate and set the total improvement slots in the city.
      */
     protected function setTotalImpSlots()
     {
@@ -408,7 +406,7 @@ class City
     }
 
     /**
-     * Returns the total improvement slots. If it's not set, then it'll set it
+     * Returns the total improvement slots. If it's not set, then it'll set it.
      *
      * @return int
      */

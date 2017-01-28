@@ -7,49 +7,49 @@ use Yosodog\PWTools\Client;
 class Alliance
 {
     /**
-     * Contains all of the leader nation IDs
+     * Contains all of the leader nation IDs.
      *
      * @var array
      */
     public $leaderIDs = [];
 
     /**
-     * The Alliance ID
+     * The Alliance ID.
      *
      * @var int
      */
     public $aID;
 
     /**
-     * The alliance name
+     * The alliance name.
      *
      * @var string
      */
     public $name;
 
     /**
-     * Surprise! It's the alliance's acronym
+     * Surprise! It's the alliance's acronym.
      *
      * @var string
      */
     public $acronym;
 
     /**
-     * The alliance's score
+     * The alliance's score.
      *
      * @var float
      */
     public $score;
 
     /**
-     * The alliance's color
+     * The alliance's color.
      *
      * @var string
      */
     public $color;
 
     /**
-     * How many members are in the alliance
+     * How many members are in the alliance.
      *
      * For SOME REASON this seems like it includes vacation mode members
      * Maybe in the future I'll make it just subtract from vModeMembers so it'll be accurate
@@ -59,112 +59,112 @@ class Alliance
     public $members;
 
     /**
-     * How many members are in vacation mode
+     * How many members are in vacation mode.
      *
      * @var int
      */
     public $vModeMembers;
 
     /**
-     * If the alliance is accepting members or not
+     * If the alliance is accepting members or not.
      *
      * @var bool
      */
     public $acceptingMembers;
 
     /**
-     * How many applicants the alliance has
+     * How many applicants the alliance has.
      *
      * @var int
      */
     public $applicants;
 
     /**
-     * The URL to the alliance's flag
+     * The URL to the alliance's flag.
      *
      * @var string
      */
     public $flagURL;
 
     /**
-     * The URL to the alliance's forum
+     * The URL to the alliance's forum.
      *
      * @var string
      */
     public $forumURL;
 
     /**
-     * The alliance's IRC channel. The # is not included
+     * The alliance's IRC channel. The # is not included.
      *
      * @var string
      */
     public $irc;
 
     /**
-     * The alliance's GDP
+     * The alliance's GDP.
      *
      * @var float
      */
     public $gdp;
 
     /**
-     * How many cities the alliance has
+     * How many cities the alliance has.
      *
      * @var int
      */
     public $cities;
 
     /**
-     * How many soldiers the alliance has
+     * How many soldiers the alliance has.
      *
      * @var int
      */
     public $soldiers;
 
     /**
-     * How many tanks the alliance has
+     * How many tanks the alliance has.
      *
      * @var int
      */
     public $tanks;
 
     /**
-     * How many aircraft the alliance has
+     * How many aircraft the alliance has.
      *
      * @var int
      */
     public $aircraft;
 
     /**
-     * How many ships the alliance has
+     * How many ships the alliance has.
      *
      * @var int
      */
     public $ships;
 
     /**
-     * How many missiles the alliance has
+     * How many missiles the alliance has.
      *
      * @var int
      */
     public $missiles;
 
     /**
-     * How many nukes the alliance has
+     * How many nukes the alliance has.
      *
      * @var int
      */
     public $nukes;
 
     /**
-     * How many treasures the alliance has
+     * How many treasures the alliance has.
      *
      * @var int
      */
     public $treasures;
 
     /**
-     * Stores all of the alliance's Nation IDs
+     * Stores all of the alliance's Nation IDs.
      *
      * Run getNationIDs() to fill this array
      *
@@ -186,7 +186,6 @@ class Alliance
 
         if (isset($json->error)) // Throw an exception if the API returns an error
             throw new \Exception($json->error);
-
         // Set everything to everything
         foreach ($json->leaderids as $id)
             array_push($this->leaderIDs, intval($id));
@@ -197,7 +196,7 @@ class Alliance
         $this->color = $json->color;
         $this->members = $json->members;
         $this->vModeMembers = $json->vmodemembers;
-        $this->acceptingMembers = boolval($json->{"accepting members"});
+        $this->acceptingMembers = boolval($json->{'accepting members'});
         $this->applicants = $json->applicants;
         $this->flagURL = $json->flagurl;
         $this->forumURL = $json->forumurl;
@@ -214,7 +213,7 @@ class Alliance
     }
 
     /**
-     * Grabs all of the nation IDs in this alliance
+     * Grabs all of the nation IDs in this alliance.
      */
     public function getNationIDs()
     {

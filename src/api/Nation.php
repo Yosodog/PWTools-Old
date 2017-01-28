@@ -7,91 +7,91 @@ use Yosodog\PWTools\Client;
 class Nation
 {
     /**
-     * Array of the nation's city IDs
+     * Array of the nation's city IDs.
      *
      * @var array
      */
     public $cityIDs = [];
 
     /**
-     * The timer for the nation's city/project
+     * The timer for the nation's city/project.
      *
      * @var int
      */
     public $cityProjectTimer;
 
     /**
-     * The nation's ID
+     * The nation's ID.
      *
      * @var int
      */
     public $nID;
 
     /**
-     * The nation's name
+     * The nation's name.
      *
      * @var string
      */
     public $name;
 
     /**
-     * The nation's pre name. EX: "Republic of"
+     * The nation's pre name. EX: "Republic of".
      *
      * @var string
      */
     public $preName;
 
     /**
-     * Which continent the nation is on
+     * Which continent the nation is on.
      *
      * @var string
      */
     public $continent;
 
     /**
-     * The nation's social policy
+     * The nation's social policy.
      *
      * @var string
      */
     public $socialPolicy;
 
     /**
-     * The nation's color
+     * The nation's color.
      *
      * @var string
      */
     public $color;
 
     /**
-     * The amount of minutes the nation since last activity
+     * The amount of minutes the nation since last activity.
      *
      * @var int
      */
     public $minsInactive;
 
     /**
-     * The nation's unique ID
+     * The nation's unique ID.
      *
      * @var string
      */
     public $uniqueID;
 
     /**
-     * The nation's government
+     * The nation's government.
      *
      * @var string
      */
     public $government;
 
     /**
-     * The nation's domestic policy
+     * The nation's domestic policy.
      *
      * @var string
      */
     public $domesticPolicy;
 
     /**
-     * The nation's war policy
+     * The nation's war policy.
      *
      * @var string
      */
@@ -107,14 +107,14 @@ class Nation
     public $founded;
 
     /**
-     * How old in days the nation is
+     * How old in days the nation is.
      *
      * @var string
      */
     public $age;
 
     /**
-     * The nation's alliance name
+     * The nation's alliance name.
      *
      * @var string
      */
@@ -126,27 +126,27 @@ class Nation
      * 2 = Member
      * 3 = Officer
      * 4 = Heir
-     * 5 = Leader
+     * 5 = Leader.
      * @var int
      */
     public $alliancePosition;
 
     /**
-     * The nation's alliance ID
+     * The nation's alliance ID.
      *
      * @var int
      */
     public $aID;
 
     /**
-     * The URL to the nation's flag
+     * The URL to the nation's flag.
      *
      * @var string
      */
     public $flagURL;
 
     /**
-     * The leader of the nation
+     * The leader of the nation.
      *
      * @var string
      */
@@ -162,14 +162,14 @@ class Nation
     public $title;
 
     /**
-     * The nation's economic policy
+     * The nation's economic policy.
      *
      * @var string
      */
     public $ecoPolicy;
 
     /**
-     * The nation's approval rating
+     * The nation's approval rating.
      *
      * @var float
      */
@@ -192,294 +192,294 @@ class Nation
     public $nationRankString;
 
     /**
-     * The total amount of nations in the game
+     * The total amount of nations in the game.
      *
      * @var int
      */
     public $totalNations;
 
     /**
-     * The amount of cities the nation has
+     * The amount of cities the nation has.
      *
      * @var int
      */
     public $cities;
 
     /**
-     * The nation's latitude
+     * The nation's latitude.
      *
      * @var float
      */
     public $latitude;
 
     /**
-     * The nation's longitude
+     * The nation's longitude.
      *
      * @var float
      */
     public $longitude;
 
     /**
-     * The nation's score
+     * The nation's score.
      *
      * @var float
      */
     public $score;
 
     /**
-     * The nation's population
+     * The nation's population.
      *
      * @var int
      */
     public $population;
 
     /**
-     * The GDP of the nation
+     * The GDP of the nation.
      *
-     * @var double
+     * @var float
      */
     public $gdp;
 
     /**
-     * The total infra in a nation
+     * The total infra in a nation.
      *
      * @var float
      */
     public $infra;
 
     /**
-     * How much land the nation has
+     * How much land the nation has.
      *
      * @var int
      */
     public $land;
 
     /**
-     * The nation's soldiers
+     * The nation's soldiers.
      *
      * @var int
      */
     public $soldiers;
 
     /**
-     * The nation's soldiers lost
+     * The nation's soldiers lost.
      *
      * @var int
      */
     public $soldiersLost;
 
     /**
-     * The amount of soldiers this nation has killed
+     * The amount of soldiers this nation has killed.
      *
      * @var int
      */
     public $soldiersKilled;
 
     /**
-     * The nation's tanks
+     * The nation's tanks.
      *
      * @var int
      */
     public $tanks;
 
     /**
-     * The nation's tanks lost
+     * The nation's tanks lost.
      *
      * @var int
      */
     public $tanksLost;
 
     /**
-     * How many tanks this nation has killed
+     * How many tanks this nation has killed.
      *
      * @var int
      */
     public $tanksKilled;
 
     /**
-     * The nation's aircraft
+     * The nation's aircraft.
      *
      * @var int
      */
     public $aircraft;
 
     /**
-     * The nation's aircraft lost
+     * The nation's aircraft lost.
      *
      * @var int
      */
     public $aircraftLost;
 
     /**
-     * How many aircraft the nation has killed
+     * How many aircraft the nation has killed.
      *
      * @var int
      */
     public $aircraftKilled;
 
     /**
-     * The nation's ships
+     * The nation's ships.
      *
      * @var int
      */
     public $ships;
 
     /**
-     * The nation's ships lost
+     * The nation's ships lost.
      *
      * @var int
      */
     public $shipsLost;
 
     /**
-     * The nation's ships killed
+     * The nation's ships killed.
      *
      * @var int
      */
     public $shipsKilled;
 
     /**
-     * The many missiles the nation has
+     * The many missiles the nation has.
      *
      * @var int
      */
     public $missiles;
 
     /**
-     * The many missiles the nation has launched
+     * The many missiles the nation has launched.
      *
      * @var int
      */
     public $missilesLaunched;
 
     /**
-     * The many missiles the nation has eaten
+     * The many missiles the nation has eaten.
      *
      * @var int
      */
     public $missilesEaten;
 
     /**
-     * The many nukes the nation has
+     * The many nukes the nation has.
      *
      * @var int
      */
     public $nukes;
 
     /**
-     * The many nukes the nation has launched
+     * The many nukes the nation has launched.
      *
      * @var int
      */
     public $nukesLaunched;
 
     /**
-     * The many nukes the nation has eaten
+     * The many nukes the nation has eaten.
      *
      * @var int
      */
     public $nukesEaten;
 
     /**
-     * How much infra this nation has killed
+     * How much infra this nation has killed.
      *
      * @var int
      */
     public $infraDestroyed;
 
     /**
-     * If the nation has the iron works project
+     * If the nation has the iron works project.
      *
      * @var bool
      */
     public $ironWorks;
 
     /**
-     * If the nation has the bauxite works project
+     * If the nation has the bauxite works project.
      *
      * @var bool
      */
     public $bauxiteWorks;
 
     /**
-     * If the nation has the arms stockpile project
+     * If the nation has the arms stockpile project.
      *
      * @var bool
      */
     public $armsStockpile;
 
     /**
-     * If the nation has the emergency gas reserve project
+     * If the nation has the emergency gas reserve project.
      *
      * @var bool
      */
     public $emgGasReserve;
 
     /**
-     * If the nation has the mass irrigation project
+     * If the nation has the mass irrigation project.
      *
      * @var bool
      */
     public $massIrrigation;
 
     /**
-     * If the nation has the international trade center project
+     * If the nation has the international trade center project.
      *
      * @var bool
      */
     public $intTradeCenter;
 
     /**
-     * If the nation has the missile launch project
+     * If the nation has the missile launch project.
      *
      * @var bool
      */
     public $missilePad;
 
     /**
-     * If the nation has the nuclear research facility project
+     * If the nation has the nuclear research facility project.
      *
      * @var bool
      */
     public $nuclearResFacility;
 
     /**
-     * If the nation has the iron dome project
+     * If the nation has the iron dome project.
      *
      * @var bool
      */
     public $ironDome;
 
     /**
-     * If the nation has the vital defense system project
+     * If the nation has the vital defense system project.
      *
      * @var bool
      */
     public $vitalDefSys;
 
     /**
-     * If the nation has the intelligence agency project
+     * If the nation has the intelligence agency project.
      *
      * @var bool
      */
     public $intelAgency;
 
     /**
-     * If the nation has the uranium enrichment project
+     * If the nation has the uranium enrichment project.
      *
      * @var bool
      */
     public $uraniumEnrichment;
 
     /**
-     * If the nation has the propaganda bureau project
+     * If the nation has the propaganda bureau project.
      *
      * @var bool
      */
     public $propBureau;
 
     /**
-     * If the nation has the central civil engineering project
+     * If the nation has the central civil engineering project.
      *
      * @var bool
      */
@@ -487,7 +487,7 @@ class Nation
 
     /**
      * Nation constructor.
-     * 
+     *
      * @param int $nationID
      * @throws \Exception Throws when the API returns an error
      */
@@ -499,7 +499,6 @@ class Nation
 
         if (isset($json->error)) // Check if the API gives an error
             throw new \Exception($json->error);
-
         // Now set everything. This gon be ugly
         foreach ($json->cityids as $cID)
             array_push($this->cityIDs, intval($cID)); // Convert the string of the ID to the actual int
@@ -572,7 +571,7 @@ class Nation
     }
 
     /**
-     * Checks if the nation is an applicant
+     * Checks if the nation is an applicant.
      *
      * @return bool
      */
@@ -582,7 +581,7 @@ class Nation
     }
 
     /**
-     * Checks if the nation is a member of the alliance
+     * Checks if the nation is a member of the alliance.
      *
      * @return bool
      */

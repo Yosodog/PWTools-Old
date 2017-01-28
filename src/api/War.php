@@ -2,7 +2,6 @@
 
 namespace Yosodog\PWTools\API;
 
-
 use Yosodog\PWTools\Client;
 
 class War
@@ -15,35 +14,35 @@ class War
     public $warEnded;
 
     /**
-     * Date/time of the war declaration
+     * Date/time of the war declaration.
      *
      * @var string
      */
     public $date;
 
     /**
-     * Aggressor's nation ID
+     * Aggressor's nation ID.
      *
      * @var int
      */
     public $aggressorID;
 
     /**
-     * Defender's nation ID
+     * Defender's nation ID.
      *
      * @var int
      */
     public $defenderID;
 
     /**
-     * Alliance name of the aggressor
+     * Alliance name of the aggressor.
      *
      * @var string
      */
     public $aggressorAlliance;
 
     /**
-     * Alliance name of the defender
+     * Alliance name of the defender.
      *
      * @var string
      */
@@ -64,56 +63,56 @@ class War
     public $aggressorOfferingPeace;
 
     /**
-     * The war reason
+     * The war reason.
      *
      * @var string
      */
     public $warReason;
 
     /**
-     * Which nation ID has ground control. 0 if no one has ground control
+     * Which nation ID has ground control. 0 if no one has ground control.
      *
      * @var int
      */
     public $groundControl;
 
     /**
-     * Which nation ID has air superiority. 0 if no one has air superiority
+     * Which nation ID has air superiority. 0 if no one has air superiority.
      *
      * @var int
      */
     public $airSuperiority;
 
     /**
-     * Which nation ID has a blockade. 0 if no one is blockaded
+     * Which nation ID has a blockade. 0 if no one is blockaded.
      *
      * @var int
      */
     public $blockade;
 
     /**
-     * How many military action points the aggressor has
+     * How many military action points the aggressor has.
      *
      * @var int
      */
     public $aggressorMAPs;
 
     /**
-     * How many military action points the defender has
+     * How many military action points the defender has.
      *
      * @var int
      */
     public $defenderMAPs;
 
     /**
-     * What the aggressor's resistance is at
+     * What the aggressor's resistance is at.
      *
      * @var int
      */
     public $aggressorResistance;
 
     /**
-     * What the defender's resistance is at
+     * What the defender's resistance is at.
      *
      * @var int
      */
@@ -140,7 +139,6 @@ class War
      */
     public $turnsLeft;
 
-
     /**
      * War constructor.
      *
@@ -153,9 +151,8 @@ class War
 
         $json = \json_decode($client->getPage("https://politicsandwar.com/api/war/{$warID}"));
 
-        if (!$json->success)
+        if (! $json->success)
             throw new \Exception($json->general_message);
-
         $this->warEnded = $json->war[0]->war_ended;
         $this->date = $json->war[0]->date;
         $this->aggressorID = intval($json->war[0]->aggressor_id);

@@ -7,7 +7,7 @@ use PHPHtmlParser\Dom;
 class Client
 {
     /**
-     * The GuzzleHttp client used for everything
+     * The GuzzleHttp client used for everything.
      *
      * @var Client
      */
@@ -15,21 +15,21 @@ class Client
 
     /**
      * True if they've logged in, false if not. Used to make sure they're logged in
-     * before doing things that requires being logged in
+     * before doing things that requires being logged in.
      *
      * @var bool
      */
     protected $loggedIn;
 
     /**
-     * Stores the user's email
+     * Stores the user's email.
      *
      * @var string
      */
     protected $email;
 
     /**
-     * Stores the user's password
+     * Stores the user's password.
      *
      * @var string
      */
@@ -44,8 +44,8 @@ class Client
     public function __construct(string $email = null, string $password = null)
     {
         $this->client = new \GuzzleHttp\Client([
-            "verify"  => false,
-            "cookies" => true
+            'verify' => false,
+            'cookies' => true,
         ]);
 
         // If the email/password isn't entered, they'll still be set to null here. No need to check if they're null or not
@@ -54,7 +54,7 @@ class Client
     }
 
     /**
-     * Grabs a page and returns the HTML
+     * Grabs a page and returns the HTML.
      *
      * @param string $url
      * @return string
@@ -67,7 +67,7 @@ class Client
     }
 
     /**
-     * Sets both the email and password
+     * Sets both the email and password.
      *
      * @param string $email
      * @param string $password
@@ -79,7 +79,7 @@ class Client
     }
 
     /**
-     * Sets just the password
+     * Sets just the password.
      *
      * @param string $password
      */
@@ -89,7 +89,7 @@ class Client
     }
 
     /**
-     * Sets just the email
+     * Sets just the email.
      *
      * @param string $email
      */
@@ -99,7 +99,7 @@ class Client
     }
 
     /**
-     * Logs you into PW so you can perform actions that require you to be logged in
+     * Logs you into PW so you can perform actions that require you to be logged in.
      *
      * @param bool $rememberMe
      * @throws \Exception
@@ -107,35 +107,34 @@ class Client
     public function login(bool $rememberMe = false)
     {
         // Check if the email/password is set
-        if (!isset($this->email) || !isset($this->password))
-            throw new \Exception("Your email or password was not set before trying to log in. Please run setCredentials() before trying to login");
-
+        if (! isset($this->email) || ! isset($this->password))
+            throw new \Exception('Your email or password was not set before trying to log in. Please run setCredentials() before trying to login');
         if ($this->loggedIn)
             return;
 
         if ($rememberMe) {
             $postData = [
-                "email"      => $this->email,
-                "password"   => $this->password,
-                "rememberme" => 1,
-                "loginform"  => "Login"
+                'email' => $this->email,
+                'password' => $this->password,
+                'rememberme' => 1,
+                'loginform' => 'Login',
             ];
         } else {
             $postData = [
-                "email"     => $this->email,
-                "password"  => $this->password,
-                "loginform" => "Login"
+                'email' => $this->email,
+                'password' => $this->password,
+                'loginform' => 'Login',
             ];
         }
 
-        $this->sendPOST("https://politicsandwar.com/login/", $postData);
+        $this->sendPOST('https://politicsandwar.com/login/', $postData);
         $this->loggedIn = true;
 
         // TODO validate that the login was successful
     }
 
     /**
-     * Logs the client out of the nation
+     * Logs the client out of the nation.
      */
     public function logout()
     {
@@ -143,7 +142,7 @@ class Client
     }
 
     /**
-     * Sends a post request using Guzzle
+     * Sends a post request using Guzzle.
      *
      * @param string $url
      * @param array $postData
@@ -153,19 +152,18 @@ class Client
      */
     public function sendPOST(string $url, array $postData, bool $needsToBeLoggedIn = false)
     {
-        if ($needsToBeLoggedIn && !$this->loggedIn)
-            throw new \Exception("You need to be logged in to send this POST request");
-
+        if ($needsToBeLoggedIn && ! $this->loggedIn)
+            throw new \Exception('You need to be logged in to send this POST request');
         // Setup POST
         $post = [
-            "form_params" => $postData
+            'form_params' => $postData,
         ];
 
-        return $this->client->request("POST", $url, $post)->getBody();
+        return $this->client->request('POST', $url, $post)->getBody();
     }
 
     /**
-     * Sends a GET request and returns the HTML
+     * Sends a GET request and returns the HTML.
      *
      * @param string $url
      * @param array $params
@@ -175,16 +173,15 @@ class Client
      */
     public function sendGET(string $url, array $params = [], bool $needsToBeLoggedIn = false) : string
     {
-        if ($needsToBeLoggedIn && !$this->loggedIn)
-            throw new \Exception("You need to be logged in to send this GET request");
-
+        if ($needsToBeLoggedIn && ! $this->loggedIn)
+            throw new \Exception('You need to be logged in to send this GET request');
         return $this->client->get($url, [
-            "query" => $params
+            'query' => $params,
         ])->getBody();
     }
 
     /**
-     * Gets the CSRF token in PW for certain POST requests
+     * Gets the CSRF token in PW for certain POST requests.
      *
      * @param int $allianceID This should be whatever alliance ID the currently logged in user is
      * @return string
@@ -198,13 +195,13 @@ class Client
         $dom->load($html);
 
         // Get the token from the input name
-        $token = $dom->find("input[name=token]");
+        $token = $dom->find('input[name=token]');
 
         return $token->value;
     }
 
     /**
-     * Sends a message to someone
+     * Sends a message to someone.
      *
      * @param string $recipient
      * @param string $subject
@@ -213,21 +210,20 @@ class Client
      */
     public function sendMessage(string $recipient, string $subject, string $message)
     {
-        if (!$this->loggedIn)
-            throw new \Exception("You must be logged in to send a message. Run login() first.");
-
-        $this->sendPOST("https://politicsandwar.com/inbox/message/", [
-            "newconversation" => "true", // Has to be a string
-            "receiver"        => $recipient,
-            "carboncopy"      => "",
-            "subject"         => $subject,
-            "body"            => $message,
-            "sndmsg"          => "Send Message",
+        if (! $this->loggedIn)
+            throw new \Exception('You must be logged in to send a message. Run login() first.');
+        $this->sendPOST('https://politicsandwar.com/inbox/message/', [
+            'newconversation' => 'true', // Has to be a string
+            'receiver' => $recipient,
+            'carboncopy' => '',
+            'subject' => $subject,
+            'body' => $message,
+            'sndmsg' => 'Send Message',
         ], true);
     }
 
     /**
-     * Sets someone as a member in an alliance
+     * Sets someone as a member in an alliance.
      *
      * @param string $leader
      * @param int $allianceID
@@ -238,7 +234,7 @@ class Client
     }
 
     /**
-     * Removes a member from an alliance
+     * Removes a member from an alliance.
      *
      * @param string $leader
      * @param int $allianceID
@@ -249,7 +245,7 @@ class Client
     }
 
     /**
-     * Sets a member as an applicant
+     * Sets a member as an applicant.
      *
      * @param string $leader
      * @param int $allianceID
@@ -260,7 +256,7 @@ class Client
     }
 
     /**
-     * Sets a member as an officer
+     * Sets a member as an officer.
      *
      * @param string $leader
      * @param int $allianceID
@@ -271,7 +267,7 @@ class Client
     }
 
     /**
-     * Sets a member as the heir
+     * Sets a member as the heir.
      *
      * @param string $leader
      * @param int $allianceID
@@ -282,7 +278,7 @@ class Client
     }
 
     /**
-     * Sets a member as the leader
+     * Sets a member as the leader.
      *
      * @param string $leader
      * @param int $allianceID
@@ -309,9 +305,9 @@ class Client
     protected function changeMemberLevel(string $leader, int $level, int $allianceID)
     {
         $this->sendPOST("https://politicsandwar.com/alliance/id={$allianceID}", [
-            "nationperm" => $leader,
-            "level" => $level,
-            "permsubmit" => "Go",
+            'nationperm' => $leader,
+            'level' => $level,
+            'permsubmit' => 'Go',
         ], true);
     }
 }

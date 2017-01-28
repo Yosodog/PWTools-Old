@@ -7,7 +7,7 @@ use Yosodog\PWTools\Client;
 class Nations
 {
     /**
-     * Holds the client which we'll do stuff with
+     * Holds the client which we'll do stuff with.
      *
      * @var Client
      */
@@ -34,11 +34,11 @@ class Nations
      */
     protected function callAPI()
     {
-        $this->json = \json_decode($this->client->getPage("https://politicsandwar.com/api/nations/"));
+        $this->json = \json_decode($this->client->getPage('https://politicsandwar.com/api/nations/'));
     }
 
     /**
-     * Gets all the nation IDs for everyone in an alliance
+     * Gets all the nation IDs for everyone in an alliance.
      *
      * @param int $aID Alliance ID
      * @return array

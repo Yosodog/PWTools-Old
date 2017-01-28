@@ -67,7 +67,7 @@ class Trading
         // Store highestBuy and lowestSell in an anon class
         $tradeClass = new class {
             /**
-             * @var string $date
+             * @var string
              * @var int $nID
              * @var int $amount The amount of the resource being sold
              * @var int $price The PPU of the trade offer
@@ -76,7 +76,7 @@ class Trading
             public $date, $nID, $amount, $price, $totalValue;
 
             /**
-             * Set the values for the trade
+             * Set the values for the trade.
              *
              * @param \stdClass $stdClass
              */
@@ -88,6 +88,7 @@ class Trading
                 $this->price = intval($stdClass->price);
                 $this->totalValue = $stdClass->totalvalue;
             }
+
         };
 
         $this->highestBuy = new $tradeClass;
