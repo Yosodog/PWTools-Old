@@ -64,7 +64,7 @@ class PWClient
         $get = $this->client->get("politicsandwar.com/api/v2/nations/".$this->queryBuilder($params))->getBody();
 
         // Decode JSON
-        $json = json_decode($get);
+        $json = json_decode($get, false, 512, JSON_THROW_ON_ERROR);
 
         $this->validateAPICall($json);
 
