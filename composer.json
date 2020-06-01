@@ -9,9 +9,6 @@
     "guzzlehttp/guzzle": "~6.0",
     "paquettg/php-html-parser": "^1.7"
   },
-  "require-dev": {
-    "phpdocumentor/phpdocumentor": "2.*"
-  },
   "autoload": {
     "psr-4": {
       "Yosodog\\PWTools\\": "src/"
