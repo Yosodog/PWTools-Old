@@ -42,9 +42,17 @@ class Nation
     /**
      * Nation constructor.
      *
-     * @param \stdClass $nation
+     * When the Nation API is implemented, you will create a Nation class which will call the API
+     *
+     * @param int $nID
+     * @param PWClient $client
      */
-    public function __construct(\stdClass $nation)
+    public function __construct(int $nID, PWClient $client = null)
+    {
+        // TODO When the Nation API comes in, this is how you will create a nation
+    }
+
+    protected function setupProperties(\stdClass $nation)
     {
         $this->nID = $nation->nation_id;
         $this->nationName = $nation->nation;
@@ -71,5 +79,20 @@ class Nation
         $this->ships = $nation->ships;
         $this->missiles = $nation->missiles;
         $this->nukes = $nation->nukes;
+    }
+
+    /**
+     * This method creates an instance of itself by us passing an API call that has already been made probably from the Nations endpoint
+     *
+     * @param \stdClass $nationAPI
+     * @return static
+     */
+    public static function fromNationsAPI(\stdClass $nationAPI) : self
+    {
+        // Setup nation Class
+        $nation = new self($nationAPI->nation_id);
+        $nation->setupProperties($nationAPI);
+
+        return $nation;
     }
 }

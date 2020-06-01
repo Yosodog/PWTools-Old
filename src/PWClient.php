@@ -48,7 +48,9 @@ class PWClient
      *
      * @param array $params
      * @return Nations
+     * @throws APIError
      * @throws NotValidParam
+     * @throws \JsonException
      */
     public function nations(array $params = []) : Nations
     {

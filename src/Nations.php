@@ -28,7 +28,7 @@ class Nations implements \Iterator
 
         foreach ($nations as $nation)
         {
-            array_push($collection, new Nation($nation));
+            array_push($collection, Nation::fromNationsAPI($nation));
         }
 
         $this->nations = $collection;
